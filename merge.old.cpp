@@ -13,7 +13,7 @@ void longranking(int *p1, int length1, int *p2, int length2, int *p);
 void pranking(int **p1, int length1, int **p2, int length2, int **p);
 void printarray(int *p, int length);
 
-#define N_DEFAULT1 102
+#define N_DEFAULT1 80
 #define N_DEFAULT2 102
 
 int main(){
@@ -37,7 +37,7 @@ void inputarray1(int *p, int length){
   
   int i;
   for(i=0;i<length;i++){
-    p[i]=pow(i,2)+1200;
+    p[i]=pow(i,2);
   }
 }
 
@@ -148,7 +148,7 @@ void longranking(int *p1, int length1, int *p2, int length2, int *p){
     *(p+j+(i+1)*n1-1)=p1[(i+1)*n1-1];
     cout << *(p+j+(i+1)*n1-1)<< endl;
     partition12[i]=p2+j;
-//    if (j==length2) {partition12[i]--;}
+    if (j==length2) {partition12[i]--;}
   }
   
   for(i=0;i<n2;i++){
@@ -159,7 +159,7 @@ void longranking(int *p1, int length1, int *p2, int length2, int *p){
     *(p+j+(i+1)*n2-1)=p2[(i+1)*n2-1];
     cout << *(p+j+(i+1)*n2-1)<< endl;
     partition21[i]=p1+j;
-//    if (j==length1) {partition21[i]--;}
+    if (j==length1) {partition21[i]--;}
   } 
   
   pranking(partition11,n1,partition21,n2,partitiont1);
@@ -167,19 +167,9 @@ void longranking(int *p1, int length1, int *p2, int length2, int *p){
   
   ranking(p1,partitiont1[0]-p1, p2, partitiont2[0]-p2, p);
   for(i=0;i<n1+n2-1;i++){
-//    if((partitiont1[i]-p1<length1)&&(partitiont2[i]-p2<length2)){
     ranking(partitiont1[i],partitiont1[i+1]-partitiont1[i],partitiont2[i],partitiont2[i+1]-partitiont2[i], p+(partitiont1[i]-p1)+(partitiont2[i]-p2));
-      
   }
-  if((partitiont1[i]-p1<length1)&&(partitiont2[i]-p2<length2)){ 
   ranking(partitiont1[n1+n2-1], p1+length1-partitiont1[n1+n2-1], partitiont2[n1+n2-1], p2+length2-partitiont2[n1+n2-1], p+(partitiont1[n1+n2-1]-p1)+(partitiont2[n1+n2-1]-p2));
-  }
-  else if (partitiont1[i]-p1>=length1){
-    for(j=0;j<p2+length2-partitiont2[n1+n2-1];j++){ *(p+(partitiont1[n1+n2-1]-p1)+(partitiont2[n1+n2-1]-p2)+j)=*(partitiont2[n1+n2-1]+j);}
-  }
-  else if (partitiont2[i]-p2>=length2){
-    for(j=0;j<p1+length1-partitiont1[n1+n2-1];j++){ *(p+(partitiont1[n1+n2-1]-p1)+(partitiont2[n1+n2-1]-p2)+j)=*(partitiont1[n1+n2-1]+j);}
-  }
 
 }
 

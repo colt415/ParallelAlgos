@@ -1,6 +1,8 @@
 //quick sorting
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 void inputarray(int *p, int length);
@@ -9,12 +11,13 @@ void quicksort(int *p,int *q);
 void printarray(int *p, int length);
 void swap(int* p, int* q);
 
-#define N_DEFAULT 10
+#define N_DEFAULT 100
 
 int main(){
   int array[N_DEFAULT];
   int *q;
   q=array+N_DEFAULT-1;
+  srand(time(0));
   inputarray(array, N_DEFAULT);
   cout << "input array:";
   printarray(array, N_DEFAULT);
@@ -37,11 +40,12 @@ void inputarray(int *p, int length){
 
   int i;
   for(i=0;i<length;i++){
-    cout << "please input integers: ";
-    cin >> p[i];
-    cout << endl;
+//    cout << "please input integers: ";
+//    cin >> p[i];
+//    cout << endl;
+    p[i]=rand()%200;
   }
-  cout << "array length is"<< i << endl;
+  cout << "array length is "<< i << endl;
 } 
 /*
 void bubblesort(int* p, int length){
